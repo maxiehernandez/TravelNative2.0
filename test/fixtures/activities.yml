@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  agenda: 
+  location: MyString
+  time: 2016-08-28
+  category: MyString
+  local: one
+
+two:
+  title: MyString
+  agenda: 
+  location: MyString
+  time: 2016-08-28
+  category: MyString
+  local: two

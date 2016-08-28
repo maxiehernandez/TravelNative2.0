@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828175659) do
+ActiveRecord::Schema.define(version: 20160828181517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "title"
+    t.text     "agenda"
+    t.string   "location"
+    t.date     "time"
+    t.string   "category"
+    t.integer  "local_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["local_id"], name: "index_activities_on_local_id", using: :btree
+  end
 
   create_table "locals", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -53,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160828175659) do
     t.index ["traveler_id"], name: "index_users_on_traveler_id", using: :btree
   end
 
+  add_foreign_key "activities", "locals"
   add_foreign_key "locals", "users"
   add_foreign_key "travelers", "users"
   add_foreign_key "users", "locals"
