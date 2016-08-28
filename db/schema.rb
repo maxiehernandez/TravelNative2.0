@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828181517) do
+ActiveRecord::Schema.define(version: 20160828193222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 20160828181517) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_locals_on_user_id", using: :btree
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "matched_user_id"
+    t.index ["matched_user_id"], name: "index_matches_on_matched_user_id", using: :btree
+    t.index ["user_id"], name: "index_matches_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -67,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160828181517) do
 
   add_foreign_key "activities", "locals"
   add_foreign_key "locals", "users"
+  add_foreign_key "matches", "users"
   add_foreign_key "travelers", "users"
   add_foreign_key "users", "locals"
   add_foreign_key "users", "travelers"
